@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>D20 Dice System</title>
+	<link href="stylesheet.css" rel="stylesheet" type="text/css">
+	<script src="d20Dice.js">
+	</script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js">
+	</script>
+	<script>
+		$(document).ready(function() {
+			$('div.rolls').fadeTo(0, 0);
+ 			$('div.faqPage').slideUp(0);
+			$('#hideRolls').click(function() {
+    			$('div.rolls').fadeTo('slow', 0);
+    		});
+    		$('#showRolls').click(function() {
+    			$('div.rolls').fadeTo('slow', 1);
+    		});
+			$('#showFAQ').click(function() {
+     			$('div.faqPage').slideDown('slow');
+       			$('div.page').fadeTo('fast', 0);
+       		});
+    		$('#hideFAQ').click(function() {
+    			$('div.faqPage').slideUp('fast');
+    			$('.page').fadeTo('slow', 1);
+   		 	});
+    	});
+	</script>
+</head>
+<body>
+<div class="faqPage">
+<span id="faqText">This is a D20 Dice rolling system built in Javascript. The purpose of this program is to help Dungeon Masters, or anyone who needs dice values from the D20 system, easily get dice rolls on various dice.<br>
+The program has the ability to roll D4, D6, D8, D10, D12, D20 & D100 dice as well as a dice with a number of sides specified by the user.<br><br>
+After selecting the number of dice to use the program will roll and calculate outputs based on the values of each dice rolled.<br><br><br>
+A user is able to get the following outputs:<br><br>
+&nbsp;&nbsp;&nbsp;Sum of all dice<br>
+&nbsp;&nbsp;&nbsp;Value of each dice rolled<br>
+&nbsp;&nbsp;&nbsp;Highest dice rolled<br>
+&nbsp;&nbsp;&nbsp;Lowest dice rolled<br>
+&nbsp;&nbsp;&nbsp;Value of all dice rolled multiplied together<br>
+&nbsp;&nbsp;&nbsp;Average value of all dice rolled<br><br><br>
+Currently, the program only calculates these outputs for one type of dice at a time. Meaning that you can't sum the value of all D4's with all the D20's.<br>
+This will possibly be a future in later updates.<br><br>
+Source code can be found at <a href="https://github.com/pumodi/d20DiceSystem_javascript">Github</a>.<br>
+Feel free to fork the code and make your own D20 dice system.<br><br>
+If you get use out of this, please feel free to email <a href="mailto:jeffbricemusic@gmail.com">me</a> and let me know what you think.<br><br>
+Thanks for visiting and happy adventuring!<br><br>
+<span id="hideFAQ">Click here to close</span>
+</div>
+<div class="page">
+<h1>
+	D20 Dice System
+</h1>
+<span style="color: magenta; text-decoration: underline;" id="showFAQ">What is this program?</span> <br>
+<br>
+<span> How many of each dice would you like to roll? </span> <br>
+<span class="inputWarn"> Please note, if you enter something other than a number the program will give an ouput of 'Undefined'. </span> <br>
+<br>
+<form onsubmit="javascript:rollDice(this.form);return false" name="sidesForm">
+	D100:
+	<input name="d100" type="text">
+	<br>
+	D20:
+	<input name="d20" type="text">
+	<br>
+	D12:
+	<input name="d12" type="text">
+	<br>
+	D10:
+	<input name="d10" type="text">
+	<br>
+	D8:
+	<input name="d8" type="text">
+	<br>
+	D6:
+	<input name="d6" type="text">
+	<br>
+	D4:
+	<input name="d4" type="text">
+	<br>
+	<br>
+	<span> If you would like to roll a custom dice, please specify the number of dice & the number of sides </span> <br>
+	<br>
+	Number of Dice:
+	<input name="numCust" type="text">
+	<br>
+	Number of Sides:
+	<input name="sidesCust" type="text">
+	<br>
+	<br>
+	<input class="submit" type="submit" value="Roll the bones" id="showRolls" />
+</form>
+<form onsubmit="javascript:clearForm(this.form);return false" name="clearForm">
+	<input class="submit" type="submit" value="Clear Tables" id="hideRolls" />
+</form>
+<br>
+<div class="rolls">
+<h2>
+Your rolls
+</h2>
+<span> Expand text fields to see larger results </span>
+<form action="" method="post" name="output">
+<table>
+	<tr>
+		<th colspan="9"> Total Value </th>
+	</tr>
+	<tr>
+		<td> Custom
+		<textarea name="custSum" cols="3" rows="1" value=""></textarea>
+		</td>
+		<td> D4
+		<textarea name="d4Sum" cols="3" rows="1" value=""></textarea>
+		</td>
+		<td> D6
+		<textarea name="d6Sum" cols="3" rows="1" value=""></textarea>
+		</td>
+		<td> D8
+		<textarea name="d8Sum" cols="3" rows="1" value=""></textarea>
+		</td>
+		<td> D10
+		<textarea name="d10Sum" cols="3" rows="1" value=""></textarea>
+		</td>
+		<td> D12
+		<textarea name="d12Sum" cols="3" rows="1" value=""></textarea>
+		</td>
+		<td> D20
+		<textarea name="d20Sum" cols="3" rows="1" value=""></textarea>
+		</td>
+		<td> D100
+		<textarea name="d100Sum" cols="3" rows="1" value=""></textarea>
+		</td>
+	</tr>
+</table>
+<br>
+</form>
+<form action="" method="post" name="output2">
+<table>
+	<tr>
+		<th colspan="9"> Each Dice </th>
+	</tr>
+	<tr>
+		<td> Custom
+		<textarea name="custArray" cols="3" rows="1" value=""></textarea>
+		</td>
+		<td> D4
+		<textarea name="d4Array" cols="3" rows="1" value=""></textarea>
+		</td>
+		<td> D6
+		<textarea name="d6Array" cols="3" rows="1" value=""></textarea>
+		</td>
+		<td> D8
+		<textarea name="d8Array" cols="3" rows="1" value=""></textarea>
+		</td>
+		<td> D10
+		<textarea name="d10Array" cols="3" rows="1" value=""></textarea>
+		</td>
+		<td> D12
+		<textarea name="d12Array" cols="3" rows="1" value=""></textarea>
+		</td>
+		<td> D20
+		<textarea name="d20Array" cols="3" rows="1" value=""></textarea>
+		</td>
+		<td> D100
+		<textarea name="d100Array" cols="3" rows="1" value=""></textarea>
+		</td>
+	</tr>
+</table>
+<br>
+</form>
+<form action="" method="post" name="output3">
+<table>
+	<tr>
+		<th colspan="9"> Highest Dice </th>
+	</tr>
+	<tr>
+		<td> Custom
+		<textarea name="custHigh" cols="3" rows="1" value=""></textarea>
+		</td>
+		<td> D4
+		<textarea name="d4High" cols="3" rows="1" value=""></textarea>
+		</td>
+		<td> D6
+		<textarea name="d6High" cols="3" rows="1" value=""></textarea>
+		</td>
+		<td> D8
+		<textarea name="d8High" cols="3" rows="1" value=""></textarea>
+		</td>
+		<td> D10
+		<textarea name="d10High" cols="3" rows="1" value=""></textarea>
+		</td>
+		<td> D12
+		<textarea name="d12High" cols="3" rows="1" value=""></textarea>
+		</td>
+		<td> D20
+		<textarea name="d20High" cols="3" rows="1" value=""></textarea>
+		</td>
+		<td> D100
+		<textarea name="d100High" cols="3" rows="1" value=""></textarea>
+		</td>
+	</tr>
+</table>
+<br>
+</form>
+<form action="" method="post" name="output4">
+<table>
+	<tr>
+		<th colspan="9"> Lowest Dice </th>
+	</tr>
+	<tr>
+		<td> Custom
+		<textarea name="custLow" cols="3" rows="1" value=""></textarea>
+		</td>
+		<td> D4
+		<textarea name="d4Low" cols="3" rows="1" value=""></textarea>
+		</td>
+		<td> D6
+		<textarea name="d6Low" cols="3" rows="1" value=""></textarea>
+		</td>
+		<td> D8
+		<textarea name="d8Low" cols="3" rows="1" value=""></textarea>
+		</td>
+		<td> D10
+		<textarea name="d10Low" cols="3" rows="1" value=""></textarea>
+		</td>
+		<td> D12
+		<textarea name="d12Low" cols="3" rows="1" value=""></textarea>
+		</td>
+		<td> D20
+		<textarea name="d20Low" cols="3" rows="1" value=""></textarea>
+		</td>
+		<td> D100
+		<textarea name="d100Low" cols="3" rows="1" value=""></textarea>
+		</td>
+	</tr>
+</table>
+<br>
+</form>
+<form action="" method="post" name="output5">
+<table>
+	<tr>
+		<th colspan="9"> Dice Multiplied Together </th>
+	</tr>
+	<tr>
+		<td> Custom
+		<textarea name="custMulti" cols="3" rows="1" value=""></textarea>
+		</td>
+		<td> D4
+		<textarea name="d4Multi" cols="3" rows="1" value=""></textarea>
+		</td>
+		<td> D6
+		<textarea name="d6Multi" cols="3" rows="1" value=""></textarea>
+		</td>
+		<td> D8
+		<textarea name="d8Multi" cols="3" rows="1" value=""></textarea>
+		</td>
+		<td> D10
+		<textarea name="d10Multi" cols="3" rows="1" value=""></textarea>
+		</td>
+		<td> D12
+		<textarea name="d12Multi" cols="3" rows="1" value=""></textarea>
+		</td>
+		<td> D20
+		<textarea name="d20Multi" cols="3" rows="1" value=""></textarea>
+		</td>
+		<td> D100
+		<textarea name="d100Multi" cols="3" rows="1" value=""></textarea>
+		</td>
+	</tr>
+</table>
+<br>
+</form>
+<form action="" method="post" name="output6">
+<table>
+	<tr>
+		<th colspan="9"> Dice Average </th>
+	</tr>
+	<tr>
+		<td> Custom
+		<textarea name="custAverage" cols="3" rows="1" value=""></textarea>
+		</td>
+		<td> D4
+		<textarea name="d4Average" cols="3" rows="1" value=""></textarea>
+		</td>
+		<td> D6
+		<textarea name="d6Average" cols="3" rows="1" value=""></textarea>
+		</td>
+		<td> D8
+		<textarea name="d8Average" cols="3" rows="1" value=""></textarea>
+		</td>
+		<td> D10
+		<textarea name="d10Average" cols="3" rows="1" value=""></textarea>
+		</td>
+		<td> D12
+		<textarea name="d12Average" cols="3" rows="1" value=""></textarea>
+		</td>
+		<td> D20
+		<textarea name="d20Average" cols="3" rows="1" value=""></textarea>
+		</td>
+		<td> D100
+		<textarea name="d100Average" cols="3" rows="1" value=""></textarea>
+		</td>
+	</tr>
+</table>
+<br>
+<br>
+<br>
+</form>
+</div>
+</div>
+<div align="center" style="font-size: 12px;">
+	Copyright &copy; 2013 Jeffrey Brice
+</div>
+</body>
+</html>

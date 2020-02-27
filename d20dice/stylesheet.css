@@ -1,0 +1,59 @@
+body {
+	background-color: #383838;
+	font-family: Book Antiqua;
+	color: white;
+}
+button {
+	width: 100px;
+	height: 60px;
+	background-color: red;
+}
+p {
+	background-color: black;
+	width: 400px;
+	height: 700px;
+	color: white;
+}
+table {
+	width:80%;
+	border: 2px solid black;
+}
+th {
+	height: 10px;
+	border: 2px solid black;
+	background-color: #373737
+}
+td {
+	text-align: center;
+	border: 2px solid black;
+}
+.inputWarn {
+	color: red;
+	font-size: 12px;
+}
+.faq {
+	color: blue;
+	font-size: 12px;
+}
+.rolls {
+}
+.faqPage {
+	height: 600px;
+	width: 1000px;
+	border: 10px solid #dee4fa;
+	border-radius: 10px;
+	background-color: #567880;
+	position: absolute;
+	top:30px;
+	right: 250px;
+	z-index: 1;
+}
+.page {
+	z-index: 0;
+}
+#hideFAQ{
+	text-align: center;
+	text-decoration: italic;
+}
+#showFAQ{
+}
